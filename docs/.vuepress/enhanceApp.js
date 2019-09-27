@@ -1,13 +1,13 @@
 /**
  * 扩展 VuePress 应用
  */
-import VueHighlightJS from 'vue-highlight.js';
+import '../.vuepress/public/css/index.css'
 import 'highlight.js/styles/atom-one-dark.css';
-import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import VueHighlightJS from 'vue-highlight.js';
+import Element from 'element-ui'
 import VueECharts from 'vue-echarts' //注册图表
 
-import '../.vuepress/public/css/index.css'
 
 export default ({
   Vue, // VuePress 正在使用的 Vue 构造函数
