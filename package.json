@@ -17,6 +17,7 @@
     "vue-highlight.js": "^2.2.0"
   },
   "devDependencies": {
+    "bg-vue-components": "^1.1.4",
     "gh-pages": "^2.1.1",
     "less": "^3.0.2",
     "vue-echarts": "^3.0.7"

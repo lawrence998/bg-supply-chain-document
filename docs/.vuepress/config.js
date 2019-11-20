@@ -3,8 +3,8 @@ module.exports = {
   //   ['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
   // ],
   title: '供应链前端技术架构', // 设置网站标题
-  // base: '/bg-supply-chain-document/', // 使用gh-pages功能时使用
-  base: '/scmfe/', 
+  base: '/bg-supply-chain-document/', // 使用gh-pages功能时使用
+  // base: '/scmfe/', 
   repo: 'https://github.com/lawrence998/bg-supply-chain-document', // 添加 github 链接
   description: 'Just for code', //描述
   dest: './dist',   // 设置输出目录
@@ -27,8 +27,9 @@ module.exports = {
         text: 'github',
         // 这里是下拉列表展现形式。
         items: [
-          { text: 'focus-outside', link: 'https://github.com/TaoXuSheng/focus-outside' },
-          { text: 'stylus-converter', link: 'https://github.com/TaoXuSheng/stylus-converter' },
+          // { text: 'focus-outside', link: 'https://github.com/TaoXuSheng/focus-outside' },
+          // { text: 'stylus-converter', link: 'https://github.com/TaoXuSheng/stylus-converter' },
+          { text: '文档github', link: 'https://github.com/lawrence998/bg-supply-chain-document' }
         ]
       }
     ],
@@ -36,17 +37,16 @@ module.exports = {
     sidebar:{
       '/commonComponents/': [
         {
-          title: '布局类组件',
+          title: '可视化组件',
           collapsable: true,
           children: [
-            'base/test1',
-            'base/test2',
-            'base/test3',
-            'base/test4',
+            'base/button',
+            'base/treeSelect',
+            'base/cascader'
           ]
         },
         {
-          title: '可视化组件',
+          title: '布局类组件',
           collapsable: true,
           children: [
           ]
@@ -103,6 +103,14 @@ module.exports = {
         },
         '/vueCli/installation/installation',
         '/vueCli/projectDependence/projectDependence'
+      ],
+
+      '/developSpecification/': [
+        '/developSpecification/htmlSpecification/htmlSpecification',
+        '/developSpecification/cssSpecification/cssSpecification',
+        '/developSpecification/jsSpecification/jsSpecification',
+        '/developSpecification/frameSpecification/frameSpecification',
+        '/developSpecification/deploySpecification/deploySpecification'
       ]
     }
   }
