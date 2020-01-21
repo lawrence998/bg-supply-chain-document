@@ -1,25 +1,116 @@
 {
-  "name": "vue-repos",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "@lawrence998/bg-supply-chain-document",
+  "version": "1.1.1",
+  "author": "lawrence998 <lawrence998@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "rimraf dist&npm run build:component&npm run build:full",
+    "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --target lib --name listview-component src/index.component.js",
+    "build:full": "vue-cli-service build --no-clean --target lib --name listview src/index.js",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "test:unit:cover": "vue-cli-service test:unit --coverage",
+    "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change",
+
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+
+    "release": "node scripts/release.js",
+    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
+
     "deploy": "gh-pages -d dist",
     "deploy:build": "npm run docs:build && gh-pages -d dist"
   },
+  "main": "dist/listview-component.common.js",
+  "files": [
+    "dist",
+    "src",
+    "types.d.ts"
+  ],
   "dependencies": {
-    "element-ui": "^2.3.7",
+    "@laomao800/parse-size-with-unit": "^1.0.0",
+    "axios": "^0.18.1",
+    "core-js": "^3.3.2",
+    "element-ui": "^2.x",
+    "has-values": "^2.0.1",
     "highlight.js": "^9.12.0",
     "less-loader": "^4.1.0",
-    "vue": "^2.5.16",
+    "lodash": "^4.17.13",
+    "vue": "^2.6.11",
     "vue-highlight.js": "^2.2.0"
   },
   "devDependencies": {
     "bg-vue-components": "^1.1.4",
     "gh-pages": "^2.1.1",
-    "less": "^3.0.2",
-    "vue-echarts": "^3.0.7"
-  }
+    "vue-echarts": "^3.0.7",
+    "@vue/cli-plugin-babel": "^4.1.1",
+    "@vue/cli-plugin-eslint": "^4.1.1",
+    "@vue/cli-plugin-unit-jest": "^4.1.1",
+    "@vue/cli-service": "^4.1.1",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-eslint": "^10.0.3",
+    "babel-plugin-component": "^1.1.1",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-require-context-hook": "^1.0.0",
+    "conventional-changelog": "^3.0.5",
+    "conventional-changelog-angular": "^5.0.2",
+    "cross-env": "^5.2.0",
+    "eslint": "5.x",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^5.1.0",
+    "execa": "^1.0.0",
+    "express": "^4.16.3",
+    "express-delay": "^0.2.0",
+    "html-loader": "^0.5.5",
+    "inquirer": "^6.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "lint-staged": "^7.2.2",
+    "lodash-webpack-plugin": "^0.11.5",
+    "markdown-it-plantuml": "^1.2.0",
+    "markdown-loader": "^3.0.0",
+    "mockjs": "^1.0.1-beta3",
+    "normalize.css": "^8.0.1",
+    "prettier": "^1.19.1",
+    "rimraf": "^2.6.3",
+    "semver": "^5.5.1",
+    "stylelint": "^9.2.1",
+    "stylelint-config-css-modules": "^1.2.0",
+    "stylelint-config-prettier": "^3.2.0",
+    "stylelint-config-recess-order": "^2.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "vue-jest": "^3.0.4",
+    "vue-server-renderer": "^2.6.10",
+    "vue-template-compiler": "^2.6.10",
+    "vuepress": "^1.2.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "bugs": {
+    "url": "https://github.com/lawrence998/bg-supply-chain-document/issues"
+  },
+  "keywords": [
+    "vue-listview",
+    "vue",
+    "listview"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lawrence998/bg-supply-chain-document.git"
+  },
+  "types": "types.d.ts"
 }

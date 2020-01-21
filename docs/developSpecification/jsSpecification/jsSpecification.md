@@ -6,7 +6,7 @@
 :::
 
 1. 单独的`js`文件须有文件注释，文件注释用于告诉不熟悉这段代码的读者这个文件中包含哪些东西。应该提供文件的大体内容，它的作者，依赖关系和兼容性信息。如下:
-```
+```js
 /**
   * fileovervier Description of file, its uses and information
   * about its dependencies.

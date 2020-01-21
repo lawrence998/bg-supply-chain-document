@@ -15,13 +15,13 @@
 ## 兼容模式
 
 - 优先使用最新版本的IE和Chrome内核
-```bash
+```html
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 ```
 
 ## HTML头部
 保留使用利于SEO的头部（以下为推荐的html头部）
-```bash
+```html
 <!DOCTYPE html>
 <html>
     <head>
