@@ -1,0 +1,53 @@
+@import 'palette.styl'
+
+.custom-block.tip
+  border-color $accentColor
+
+table
+  font-size 14px
+  line-height 1.6
+
+th, td
+  padding: .4em .8em
+
+.el-table
+  table
+    margin 0
+    font-size inherit
+  th, td
+    border-left initial
+    border-top initial
+
+.el-date-table
+.el-date-picker table
+  margin 0
+  display table
+  tr
+    border-top inherit
+    background-color inherit
+  th, td
+    border inherit
+  th
+    border-bottom solid 1px #ebeef5
+
+mark
+  background-color #fffecb
+  background linear-gradient(#0000 50%,#fffecb 0)
+
+.navbar:hover
+  z-index 2001 !important
+
+.theme-container.demo-page-class
+  .page
+    padding-bottom 0
+  .theme-default-content:not(.custom)
+    max-width inherit
+    padding 0
+  .page-edit
+  .page-nav
+    display none
+  .demo-box div[class*="language-"]
+    border-radius 0
+  .demo-box pre[class*="language-"]
+    margin 0
+    border-radius 0

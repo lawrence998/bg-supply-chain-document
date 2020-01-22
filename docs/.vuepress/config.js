@@ -167,6 +167,27 @@ module.exports = {
             'developerGuide/listview-container',
           ]
         },
+        {
+          title: 'VueListView布局Demo',
+          collapsable: true,
+          children: [
+            'demo/all',
+            'demo/fixed-height',
+            'demo/auto-height',
+            'demo/listview-container'
+          ]
+        },
+        {
+          title: 'VueListView常用实例',
+          collapsable: true,
+          children: [
+            'commonExample/filter-buttons',
+            'commonExample/custom-filter-field',
+            'commonExample/validate',
+            'commonExample/custom-view',
+            'commonExample/request-handler'
+          ]
+        },
       ]
     }
   }
