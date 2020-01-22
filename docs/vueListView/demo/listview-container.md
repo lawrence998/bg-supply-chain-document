@@ -2,7 +2,6 @@
 pageClass: demo-page-class
 ---
 
-# 多表格容器
 <!-- markdownlint-disable MD033 -->
 <client-only>
 <demo-box codesandbox="https://codesandbox.io/s/rml1yxyx9o?module=%2Fsrc%2FApp.vue&view=preview">
@@ -22,10 +21,3 @@ pageClass: demo-page-class
 </client-only>
 <!-- markdownlint-enable MD033 -->
 
-<style>
-.theme-default-content:not(.custom) > h1:first-child {
-    margin-top: -0.1rem;
-    font-size: 22px;
-    text-align: center;
-}
-</style>
