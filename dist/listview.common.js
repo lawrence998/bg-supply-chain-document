@@ -1,4 +1,4 @@
-/*! Vue Listview v1.2.0 */
+/*! Vue Listview v1.1.2 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
