@@ -33,7 +33,7 @@
     "has-values": "^2.0.1",
     "highlight.js": "^9.12.0",
     "less-loader": "^4.1.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "vue": "^2.6.12",
     "vue-highlight.js": "^2.2.0"
   },
