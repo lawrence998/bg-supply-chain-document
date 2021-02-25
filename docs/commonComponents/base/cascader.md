@@ -1,6 +1,6 @@
 # cascader级联选择器
 ---
-可以使用下列命令安装供应链部门的cascader级联选择器组件：
+可以使用下列命令安装ascader级联选择器组件：
 ``` bash
 npm install bg-vue-components
 ```

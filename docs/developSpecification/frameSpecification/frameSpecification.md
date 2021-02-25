@@ -24,3 +24,217 @@
 14. 必须使用class语法，避免直接操作prototype属性
 
 ![例子](../../.vuepress/public/assets/images/frame-example2.png "例子")
+
+## JQ旧项目(Vue)
+---
+
+::: tip
+基本原则：当前维护的项目大部分以Jquery搭建，考虑项目的开发效率，日后重构的便利性，和组件库生态的互通。需要尽量使用Vue去维护旧项目。
+:::
+
+### 一、新需求，新页面（弹窗）
+
+通过在旧项目使用iframe，把Vue项目链接嵌入。其中JQ页面和Vue页面iframe之间**通讯规范**：
+
+JQ页：在window下挂载对象，**命名以"props_"开头 + vue页面命名**
+
+**parent.html(JQ)**:
+```
+
+window.props_son = {
+    form: {
+        input: '',
+        select: ''
+    },
+    successCallback: () => {
+
+    },
+    errorCallback: () => {
+
+    }
+}
+```
+
+**son.vue(Vue)**:
+```
+<template>
+    <div>
+        <input v-model="props.form.input" />
+        <select v-model="props.form.select"></select>
+    </div>
+<tamplate>
+
+export default {
+    data() {
+        return {
+            props: window.parent.props_son
+        }
+    },
+    methods: {
+        success() {
+            this.props.successCallback();
+        },
+        error() {
+            this.props.errorCallback();
+        }
+    }
+}
+
+```
+
+### 二、新需求，旧页面
+
+旧页面使用**Jquery和Vue共存**的方式，处理新的需求迭代，但并非都适合，面对需求，建议从三个方向考虑：
+
+- Vue实例代码和旧页面js解耦，不在同一份js中同时使用Vue和Jquery
+- 在旧页面中使用Vue，不会加重原有代码的维护难度，不会影响开发效率
+- 增加的Vue代码部分，日后重构能大部分直接复用
+
+如果满足这三个要求，才可以使用Vue。如不满足建议采用原有方式实现
+
+JQ和Vue共存**规范**：
+
+vue资源引入使用cdn链接：
+
+```
+<link rel="stylesheet" href="https://content.banggood.cn/Scripts/element-2.13.0/theme-chalk/index.css"/>
+<script type="text/javascript" src="https://content.banggood.cn/Scripts/vue-2.5.17/vue.min.js"></script>
+<script type="text/javascript" src="https://content.banggood.cn/Scripts/element-2.13.0/index.js"></script>
+```
+
+- 原有html中新建一个**节点**用于挂载vue实例。
+- 原有js的目录下新建**components**目录，用于存放组件代码。
+- 挂载节点，组件文件，**命名均以'vue_' + 组件名称**
+
+实例：
+
+**inspection.html**:
+```
+<!-- vue的挂载节点 -->
+<section class="refuse-box">
+    <div id="vue_rejectReason"></div>
+</section>
+```
+
+**pages/inspection.js**:
+```
+import vue_rejectReason from './components/vue_rejectReason.js';
+
+var Main = {
+	util: new Util(),
+	init: function(){
+		this.vue_rejectReason = vue_rejectReason({
+			el: '#vue_rejectReason',
+			data: {
+				util: this.util
+			}
+		});
+	},
+    // 发送保存请求
+    submitData() {
+        const reason = this.vue_rejectReason.formData.reason.join(';');
+        ...
+    },
+    // 回显页面
+    getCheckRes() {
+        that.vue_rejectReason.formData.remark = res.result.detection_remark;
+        if (res.result.detection_reason) that.vue_rejectReason.formData.reason = res.result.detection_reason.split(';');
+        that.vue_rejectReason.disabled = true;
+        ...
+    },
+    // 数据联动
+    getCompare: function(code){
+		var that = this;
+		var status = that.util.getUrlQuery('status');
+		var status2 = that.util.getUrlQuery('status2');
+		var rangbu = that.util.getUrlQuery('rangbu');
+		if(status2 == 1 || status2 == 2 || status2 == 4 ){
+			$('.pass-box').show()
+			this.vue_rejectReason.isShow = false;
+		}else{
+			$('.refuse-box')
+			.siblings('.pass-box').hide();
+			this.vue_rejectReason.isShow = true;
+		}
+    }
+    ...
+}
+```
+
+**/pages/components/vue_rejectReason.js**:
+```
+export default function({
+    el,
+    data
+}) {
+    return new Vue({
+        el,
+        template: `<div v-show="isShow">
+            <el-form :model="formData" ref="form" v-if="isShow" :rules="rules">
+                <div class="row-box clearfix">
+                    <div class="left-box pull-left">拒绝原因<span class="mark">*</span></div>
+                    <div class="right-box pull-left right-box-input">
+                        <el-form-item prop="reason">
+                            <el-checkbox-group v-model="formData.reason">
+                                <el-checkbox :disabled="disabled" v-for="item in listData" :key="item.value" :label="item.value">{{item.label}}</el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                    </div>
+                </div>
+                <div class="row-box clearfix">
+                    <div class="left-box pull-left">审核备注<span class="mark">*</span></div>
+                    <div class="right-box pull-left right-box-input">
+                        <div class="tex-box">
+                            <el-form-item prop="remark">
+                                <el-input
+                                    :disabled="disabled"
+                                    type="textarea"
+                                    :rows="3"
+                                    maxlength="200"
+                                    placeholder="请输入内容"
+                                    v-model="formData.remark">
+                                </el-input>
+                            </el-form-item>
+                            <span class="num-box">0/200</span>
+                        </div>
+                    </div>
+                </div>
+            </el-form>
+        </div>`,
+        methods: {
+            changeHandler(p) {
+                this.validate();
+            },
+            validate() {
+                if (!this.isShow) return Promise.resolve();
+                return this.$refs['form'].validate();
+            }
+        },
+        created() {
+            Object.keys(data).forEach(key => {
+                this[key] = data[key];
+            });
+            this.util.ajaxSubmit({
+                url: this.util.getUrl('scmNewproduct', 'displayedEnum') + `?enumName=QualityDetectionRefuseReasonEnum`,
+            }).then((res) => {
+                this.listData = res.result;
+            });
+        },
+        data() {
+            const that = this;
+            return {
+                isShow: false,
+                disabled: false,
+                rules: {},
+                formData: {
+                    remark: '',
+                    reason: [],
+                },
+                listData: [
+                    ...
+                ]
+            }
+        }
+    })
+}
+```

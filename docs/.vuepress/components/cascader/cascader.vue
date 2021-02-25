@@ -9,6 +9,7 @@
       v-model="value"
       :memoryName="'bg-cascader'"
       :request-time="requestTime"
+      :attr="attr"
     ></bg-cascader>
 
     <el-button type="primary" size="mini" @click="requestTime ++">触发保存常用</el-button>
@@ -1110,7 +1111,12 @@ export default {
     return {
       value: [],
       options,
-      requestTime: 0
+      requestTime: 0,
+      attr: {
+        id: 'mailProblemLabelId',
+        name: 'problemName',
+        options: 'children'
+      }
     }
   },
   methods: {
