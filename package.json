@@ -31,7 +31,7 @@
     "core-js": "^3.3.2",
     "element-ui": "^2.x",
     "has-values": "^2.0.1",
-    "highlight.js": "^9.12.0",
+    "highlight.js": "^10.4.1",
     "less-loader": "^4.1.0",
     "lodash": "^4.17.13",
     "vue": "^2.6.12",
